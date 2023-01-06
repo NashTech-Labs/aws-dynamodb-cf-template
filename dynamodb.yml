@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: 'DynamoDB'
+Resources:
+  IndividualLeaderboardScore:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      SSESpecification:
+        SSEEnabled: 'true'
+      AttributeDefinitions:
+        - AttributeName: 'name'
+          AttributeType: 'S'
+        - AttributeName: 'score'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'name'
+          KeyType: 'HASH'
+        - AttributeName: 'score'
+          KeyType: 'RANGE'
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: Individual_Score
+Outputs:
+  IndividualLeaderboardScore:
+    Description: 'Individual Leaderboard Score'
+    Value:
+      Ref: 'IndividualLeaderboardScore'
